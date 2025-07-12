@@ -113,7 +113,7 @@ document.addEventListener(\'DOMContentLoaded\', () => {
     updateSpotsLeft();
 
     // Chamar a função de atualização do link do WhatsApp aqui
-    updateWhatsAppLink("https://whatsapp.com/channel/0029VbAgG7U96H4T1sJ4eY3A");
+    updateWhatsAppLink("whatsapp.com/channel/0029VbAgG7U96H4T1sJ4eY3A");
 });
 
 // Função para atualizar o link do WhatsApp
