@@ -1,71 +1,71 @@
 // Smooth scrolling para links de navegação
-document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
-    anchor.addEventListener(\'click\', function (e) {
+document.querySelectorAll(\'a[href^="#"]\').forEach(âncora => {
+    anchor.addEventListener(\'clique\', função (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute(\'href\'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: \'smooth\',
-                block: \'start\'
+        se (alvo) {
+            alvo.scrollIntoView({
+                comportamento: \'suave\',
+                bloco: \'iniciar\'
             });
         }
     });
 });
 
 // Contador regressivo
-function startCountdown() {
-    const countdownElements = {
-        hours: document.getElementById(\'hours\'),
-        minutes: document.getElementById(\'minutes\'),
-        seconds: document.getElementById(\'seconds\'),
-        small: document.getElementById(\'countdown-small\')
+função startCountdown() {
+    const contagemregressivaElementos = {
+        horas: document.getElementById(\'horas\'),
+        minutos: document.getElementById(\'minutos\'),
+        segundos: document.getElementById(\'segundos\'),
+        pequeno: document.getElementById(\'contagem regressiva-pequeno\')
     };
     
     // Definir tempo inicial (23:47:32)
-    let totalSeconds = 23 * 3600 + 47 * 60 + 32;
+    deixe totalSeconds = 23 * 3600 + 47 * 60 + 32;
     
-    function updateCountdown() {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+    função updateCountdown() {
+        const horas = Math.floor(totalSeconds / 3600);
+        const minutos = Math.floor((totalSeconds % 3600) / 60);
+        const segundos = totalSeconds % 60;
         
-        if (countdownElements.hours) {
-            countdownElements.hours.textContent = hours.toString().padStart(2, \'0\');
+        se (countdownElements.horas) {
+            countdownElements.hours.textContent = horas.toString().padStart(2, \'0\');
         }
-        if (countdownElements.minutes) {
-            countdownElements.minutes.textContent = minutes.toString().padStart(2, \'0\');
+        se (countdownElements.minutos) {
+            countdownElements.minutes.textContent = minutos.toString().padStart(2, \'0\');
         }
-        if (countdownElements.seconds) {
-            countdownElements.seconds.textContent = seconds.toString().padStart(2, \'0\');
+        se (countdownElements.seconds) {
+            countdownElements.seconds.textContent = segundos.toString().padStart(2, \'0\');
         }
-        if (countdownElements.small) {
-            countdownElements.small.textContent = `${hours.toString().padStart(2, \'0\')}:${minutes.toString().padStart(2, \'0\')}:${seconds.toString().padStart(2, \'0\')}`;
+        se (countdownElements.small) {
+            countdownElements.small.textContent = `${horas.toString().padStart(2, \'0\')}:${minutos.toString().padStart(2, \'0\')}:${segundos.toString().padStart(2, \'0\')}`;
         }
         
-        totalSeconds--;
+        totalSegundos--;
         
-        if (totalSeconds < 0) {
-            totalSeconds = 23 * 3600 + 47 * 60 + 32; // Reiniciar contador
+        se (totalSegundos < 0) {
+            totalSegundos = 23 * 3600 + 47 * 60 + 32; //Reiniciar contador
         }
     }
     
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    atualizarContagemRegressiva();
+    setInterval(atualizaçãoContagemRegressiva, 1000);
 }
 
 // Contador de vagas restantes
-function updateSpotsLeft() {
+função updateSpotsLeft() {
     const spotsElements = document.querySelectorAll(\'#spots, .spots-remaining .highlight\');
-    let spots = 47;
+    deixe pontos = 47;
     
-    function decreaseSpots() {
-        if (spots > 10) {
-            spots--;
-            spotsElements.forEach(element => {
-                if (element.id === \'spots\') {
-                    element.textContent = spots;
-                } else {
-                    element.textContent = spots;
+    função decreaseSpots() {
+        se (pontos > 10) {
+            manchas--;
+            spotsElements.forEach(elemento => {
+                se (elemento.id === \'pontos\') {
+                    element.textContent = pontos;
+                } outro {
+                    element.textContent = pontos;
                 }
             });
         }
@@ -74,246 +74,246 @@ function updateSpotsLeft() {
     // Diminuir vagas a cada 30-60 segundos aleatoriamente
     setInterval(() => {
         if (Math.random() > 0.7) { // 30% de chance a cada intervalo
-            decreaseSpots();
+            diminuiPontos();
         }
-    }, Math.random() * 30000 + 30000); // Entre 30-60 segundos
+    }, Math.random() * 30.000 + 30.000); // Entre 30-60 segundos
 }
 
 // Animação de entrada para elementos quando entram na viewport
 const observerOptions = {
-    threshold: 0.1,
+    limite: 0,1,
     rootMargin: \'0px 0px -50px 0px\'
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = \'1\';
-            entry.target.style.transform = \'translateY(0)\';
-            entry.target.classList.add(\'animated\');
+const observer = new IntersectionObserver((entradas) => {
+    entradas.paraCada(entrada => {
+        se (entrada.isIntersecting) {
+            entrada.estilo.alvo.opacidade = \'1\';
+            entrada.estilo.destino.transformação = \'translateY(0)\';
+            entrada.target.classList.add(\'animado\');
         }
     });
 }, observerOptions);
 
-// Aplicar animação aos elementos
-document.addEventListener(\'DOMContentLoaded\', () => {
+//Aplica animação aos elementos
+documento.addEventListener(\'DOMContentLoaded\', () => {
     const animatedElements = document.querySelectorAll(
-        \'.benefit-card, .product-card, .testimonial-card, .faq-item\'
+        \'.cartão-de-benefícios, .cartão-de-produto, .cartão-de-testemunho, .item-de-perguntas-frequentes\'
     );
     
-    animatedElements.forEach(el => {
+    Elementosanimados.paraCada(el => {
         el.style.opacity = \'0\';
         el.style.transform = \'translateY(30px)\';
-        el.style.transition = \'opacity 0.6s ease, transform 0.6s ease\';
-        observer.observe(el);
+        el.style.transition = \'opacidade 0,6s de facilidade, transformação 0,6s de facilidade\';
+        observador.observar(el);
     });
     
     // Iniciar contadores
-    startCountdown();
-    updateSpotsLeft();
+    iniciarContagemRegressiva();
+    atualizarPontosEsquerdos();
 
-    // Chamar a função de atualização do link do WhatsApp aqui
+    // Chamar uma função de atualização do link do WhatsApp aqui
     updateWhatsAppLink("https://whatsapp.com/channel/0029VbAgG7U96H4T1sJ4eY3A");
 });
 
 // Função para atualizar o link do WhatsApp
-function updateWhatsAppLink(channelLink) {
+função updateWhatsAppLink(channelLink) {
     const whatsappLinks = document.querySelectorAll(\'#whatsapp-link, .whatsapp-button\');
     
     whatsappLinks.forEach(link => {
-        link.href = channelLink;
+        link.href = canalLink;
     });
 }
 
-// Efeito de parallax suave no hero
-window.addEventListener(\'scroll\', () => {
-    const scrolled = window.pageYOffset;
-    const heroElements = document.querySelectorAll(\\'floating-elements > div\\');
+// Efeito de paralaxe suave no hero
+janela.addEventListener(\'scroll\', () => {
+    const scrolled = janela.pageYOffset;
+    const heroElements = document.querySelectorAll(\\'elementos-flutuantes > div\\');
     
-    heroElements.forEach((element, index) => {
-        const speed = 0.1 + (index * 0.05);
+    heroElements.forEach((elemento, índice) => {
+        velocidade constante = 0,1 + (índice * 0,05);
         element.style.transform = `translateY(${scrolled * speed}px)`;
     });
 });
 
-// Efeito de hover nos cards de produto
-document.addEventListener(\'DOMContentLoaded\', () => {
+// Efeito de pairar nos cartões de produto
+documento.addEventListener(\'DOMContentLoaded\', () => {
     const productCards = document.querySelectorAll(\'.product-card\');
     
-    productCards.forEach(card => {
-        card.addEventListener(\'mouseenter\', () => {
-            card.style.transform = \'translateY(-10px) scale(1.02)\';
+    productCards.forEach(cartão => {
+        cartão.addEventListener(\'mouseenter\', () => {
+            card.style.transform = \'translateY(-10px) escala(1,02)\';
         });
         
         card.addEventListener(\'mouseleave\', () => {
-            card.style.transform = \'translateY(0) scale(1)\';
+            card.style.transform = \'translateY(0) escala(1)\';
         });
     });
 });
 
 // Adicionar efeito ripple aos botões
-function createRipple(event) {
-    const button = event.currentTarget;
-    const ripple = document.createElement(\'span\');
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
+função createRipple(evento) {
+    botão const = evento.currentTarget;
+    const ondulação = document.createElement(\'span\');
+    const rect = botão.getBoundingClientRect();
+    const tamanho = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - tamanho / 2;
+    const y = event.clientY - rect.top - tamanho / 2;
     
-    ripple.style.width = ripple.style.height = size + \'px\';
-    ripple.style.left = x + \'px\';
-    ripple.style.top = y + \'px\';
-    ripple.classList.add(\'ripple\');
+    ripple.style.width = ripple.style.height = tamanho + \'px\';
+    ondulação.estilo.esquerda = x + \'px\';
+    ondulação.style.top = y + \'px\';
+    ondulação.classList.add(\'ondulação\');
     
-    button.appendChild(ripple);
+    botão.appendChild(ondulação);
     
-    setTimeout(() => {
-        ripple.remove();
+    definirTempoLimite(() => {
+        ondulação.remover();
     }, 600);
 }
 
-// Aplicar efeito ripple aos botões
-document.addEventListener(\'DOMContentLoaded\', () => {
-    const buttons = document.querySelectorAll(\'.product-btn, .cta-button, .whatsapp-button\');
+//Aplica efeito ripple aos botões
+documento.addEventListener(\'DOMContentLoaded\', () => {
+    botões const = document.querySelectorAll(\'.product-btn, .cta-button, .whatsapp-button\');
     
-    buttons.forEach(button => {
-        button.addEventListener(\'click\', createRipple);
-        button.style.position = \'relative\';
-        button.style.overflow = \'hidden\';
+    botões.paraCada(botão => {
+        botão.addEventListener(\'clique\', createRipple);
+        button.style.position = \'relativo\';
+        button.style.overflow = \'oculto\';
     });
 });
 
 // Animação de contagem para números
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
+função animateCounter(elemento, alvo, duração = 2000) {
+    deixe start = 0;
+    const incremento = alvo / (duração / 16);
     
     const timer = setInterval(() => {
-        start += increment;
+        início += incremento;
         element.textContent = Math.floor(start).toLocaleString(\'pt-BR\');
         
-        if (start >= target) {
+        se (início >= alvo) {
             element.textContent = target.toLocaleString(\'pt-BR\');
-            clearInterval(timer);
+            clearInterval(temporizador);
         }
     }, 16);
 }
 
-// Animar números quando entram na viewport
-const numberObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains(\'animated\')) {
-            const target = parseInt(entry.target.dataset.target);
-            animateCounter(entry.target, target);
-            entry.target.classList.add(\'animated\');
+// Anima números quando entram na viewport
+const numberObserver = new IntersectionObserver((entradas) => {
+    entradas.paraCada(entrada => {
+        se (entrada.isIntersecting && !entrada.target.classList.contains(\'animado\')) {
+            const target = parseInt(entrada.alvo.conjunto de dados.alvo);
+            animateCounter(entrada.alvo, alvo);
+            entrada.target.classList.add(\'animado\');
         }
     });
 });
 
-document.addEventListener(\'DOMContentLoaded\', () => {
+documento.addEventListener(\'DOMContentLoaded\', () => {
     const statNumbers = document.querySelectorAll(\'.stat-number\');
     statNumbers.forEach(stat => {
-        const text = stat.textContent;
-        const number = text.match(/\\d+/);
-        if (number) {
-            stat.dataset.target = number[0];
+        const texto = stat.textContent;
+        const número = texto.match(/\\d+/);
+        se (número) {
+            stat.dataset.target = número[0];
             numberObserver.observe(stat);
         }
     });
 });
 
-// Tracking de eventos (para analytics futuras)
-function trackEvent(eventName, properties = {}) {
+// Acompanhamento de eventos (para análises futuras)
+função trackEvent(eventName, propriedades = {}) {
     // Aqui você pode integrar com Google Analytics, Facebook Pixel, etc.
-    console.log(\'Event tracked:\', eventName, properties);
+    console.log(\'Evento rastreado:\', eventName, propriedades);
     
     // Exemplo para Google Analytics (descomente se usar)
-    // if (typeof gtag !== \'undefined\') {
-    //     gtag(\'event\', eventName, properties);
+    // se (tipo de gtag !== \'indefinido\') {
+    // gtag(\'evento\', nomeDoEvento, propriedades);
     // }
 }
 
 // Rastrear cliques nos CTAs
-document.addEventListener(\'DOMContentLoaded\', () => {
+documento.addEventListener(\'DOMContentLoaded\', () => {
     const ctaButtons = document.querySelectorAll(\'.cta-button, .whatsapp-button\');
     
-    ctaButtons.forEach(button => {
-        button.addEventListener(\'click\', () => {
+    ctaButtons.forEach(botão => {
+        botão.addEventListener(\'clique\', () => {
             trackEvent(\'cta_click\', {
-                button_text: button.textContent.trim(),
-                button_location: button.closest(\'section\')?.id || \'unknown\'
+                texto do botão: button.textContent.trim(),
+                button_location: button.closest(\'seção\')?.id || \'desconhecido\'
             });
         });
     });
     
     // Rastrear cliques nos produtos
     const productButtons = document.querySelectorAll(\'.product-btn\');
-    productButtons.forEach(button => {
-        button.addEventListener(\'click\', () => {
-            const productName = button.closest(\'.product-card\').querySelector(\'h3\').textContent;
-            trackEvent(\'product_click\', {
-                product_name: productName
+    productButtons.forEach(botão => {
+        botão.addEventListener(\'clique\', () => {
+            const productName = botão.closest(\'.product-card\').querySelector(\'h3\').textContent;
+            trackEvent(\'clique_no_produto\', {
+                nome_do_produto: nome_do_produto
             });
         });
     });
 });
 
 // CSS para o efeito ripple
-const style = document.createElement(\'style\');
-style.textContent = `
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-        pointer-events: none;
+const estilo = document.createElement(\'estilo\');
+estilo.textContent = `
+    .ondulação {
+        posição: absoluta;
+        raio da borda: 50%;
+        fundo: rgba(255, 255, 255, 0.6);
+        transformar: escala(0);
+        animação: animação ripple 0,6s linear;
+        eventos de ponteiro: nenhum;
     }
     
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
+    @keyframes animação ondulada {
+        para {
+            transformar: escala(4);
+            opacidade: 0;
         }
     }
     
-    .animated {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
+    .animado {
+        opacidade: 1 !importante;
+        transformar: translateY(0) !importante;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(estilo);
 
-// Função para mostrar notificações de vendas (social proof dinâmico)
-function showSaleNotification() {
-    const names = [\'Maria S.\', \'João P.\', \'Ana C.\', \'Carlos M.\', \'Lucia R.\', \'Pedro F.\'];
-    const cities = [\'São Paulo\', \'Rio de Janeiro\', \'Belo Horizonte\', \'Salvador\', \'Brasília\', \'Curitiba\'];
-    const products = [\'Kit Eletrônicos\', \'Conjunto Casa & Decoração\', \'Pacote Moda & Estilo\', \'Kit Saúde & Fitness\'];
+// Função para mostrar notificações de vendas (prova social dinâmica)
+função showSaleNotification() {
+    const nomes = [\'Maria S.\', \'João P.\', \'Ana C.\', \'Carlos M.\', \'Lucia R.\', \'Pedro F.\'];
+    const cidades = [\'São Paulo\', \'Rio de Janeiro\', \'Belo Horizonte\', \'Salvador\', \'Brasília\', \'Curitiba\'];
+    const produtos = [\'Kit Eletrônicos\', \'Conjunto Casa & Decoração\', \'Pacote Moda & Estilo\', \'Kit Saúde & Fitness\'];
     
-    const notification = document.createElement(\'div\');
-    notification.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        background: #28a745;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        z-index: 1000;
-        font-size: 0.9rem;
-        max-width: 300px;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
+    notificação constante = document.createElement(\'div\');
+    notificação.estilo.cssTexto = `
+        posição: fixa;
+        inferior: 20px;
+        esquerda: 20px;
+        fundo: #28a745;
+        cor: branco;
+        preenchimento: 15px 20px;
+        raio da borda: 10px;
+        caixa-sombra: 0 4px 15px rgba(0,0,0,0.2);
+        índice z: 1000;
+        tamanho da fonte: 0,9rem;
+        largura máxima: 300px;
+        transformar: traduzirX(-100%);
+        transição: transformação 0,3s facilidade;
     `;
     
-    const randomName = names[Math.floor(Math.random() * names.length)];
-    const randomCity = cities[Math.floor(Math.random() * cities.length)];
-    const randomProduct = products[Math.floor(Math.random() * products.length)];
+    const randomName = nomes[Math.floor(Math.random() * nomes.length)];
+    const randomCity = cidades[Math.floor(Math.random() * cidades.length)];
+    const randomProduct = produtos[Math.floor(Math.random() * produtos.length)];
     
-    notification.innerHTML = `
+    notificação.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 8px; height: 8px; background: #ffd700; border-radius: 50%; animation: pulse 1s infinite;"></div>
+            <div style="largura: 8px; altura: 8px; plano de fundo: #ffd700; raio da borda: 50%; animação: pulso 1s infinito;"></div>
             <div>
                 <strong>${randomName}</strong> de ${randomCity}<br>
                 acabou de adquirir: <strong>${randomProduct}</strong>
@@ -321,32 +321,31 @@ function showSaleNotification() {
         </div>
     `;
     
-    document.body.appendChild(notification);
+    document.body.appendChild(notificação);
     
-    setTimeout(() => {
-        notification.style.transform = \'translateX(0)\';
+    definirTempoLimite(() => {
+        notificação.estilo.transform = \'translateX(0)\';
     }, 100);
     
-    setTimeout(() => {
+    definirTempoLimite(() => {
         notification.style.transform = \'translateX(-100%)\';
-        setTimeout(() => {
-            notification.remove();
+        definirTempoLimite(() => {
+            notificação.remove();
         }, 300);
     }, 4000);
 }
 
 // Mostrar notificações de venda periodicamente
-document.addEventListener(\'DOMContentLoaded\', () => {
+documento.addEventListener(\'DOMContentLoaded\', () => {
     // Primeira notificação após 10 segundos
     setTimeout(showSaleNotification, 10000);
     
-    // Depois a cada 30-60 segundos
+    // Depois de cada 30-60 segundos
     setInterval(() => {
-        if (Math.random() > 0.5) {
+        se (Math.random() > 0,5) {
             showSaleNotification();
         }
     }, Math.random() * 30000 + 30000);
 });
-
 
 
